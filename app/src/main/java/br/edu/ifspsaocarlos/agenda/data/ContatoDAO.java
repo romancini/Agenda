@@ -25,15 +25,19 @@ public class ContatoDAO {
 
         Cursor cursor;
 
-        if (nome!=null)
-              cursor = database.query(SQLiteHelper.DATABASE_TABLE, new String[] {
-                        SQLiteHelper.KEY_ID,SQLiteHelper.KEY_NAME, SQLiteHelper.KEY_FONE, SQLiteHelper.KEY_EMAIL}, SQLiteHelper.KEY_NAME + " like ? or " + SQLiteHelper.KEY_FONE + " = ?", new String[] { nome+"%", nome },
+        String[] cols=new String[] {SQLiteHelper.KEY_ID,SQLiteHelper.KEY_NAME, SQLiteHelper.KEY_FONE, SQLiteHelper.KEY_EMAIL};
+        String where=null;
+        String[] argWhere=null;
+
+        if (nome!=null) {
+            where = SQLiteHelper.KEY_NAME + " like ?";
+            argWhere = new String[]{nome + "%"};
+        }
+
+
+        cursor = database.query(SQLiteHelper.DATABASE_TABLE, cols, where , argWhere,
                 null, null, SQLiteHelper.KEY_NAME);
 
-            else
-               cursor = database.query(SQLiteHelper.DATABASE_TABLE, new String[] {
-                    SQLiteHelper.KEY_ID, SQLiteHelper.KEY_NAME, SQLiteHelper.KEY_FONE,
-                    SQLiteHelper.KEY_EMAIL},null,null,null,null, SQLiteHelper.KEY_NAME);
 
 
        if (cursor!=null)
