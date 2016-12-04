@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import br.edu.ifspsaocarlos.agenda.model.Contato;
 import br.edu.ifspsaocarlos.agenda.R;
 
@@ -37,6 +39,7 @@ public class ContatoAdapter extends RecyclerView.Adapter<ContatoAdapter.ContatoV
     public void onBindViewHolder(ContatoViewHolder holder, int position) {
         Contato contato  = contatos.get(position) ;
         holder.nome.setText(contato.getNome());
+        holder.fone.setText(contato.getFone());
     }
 
     @Override
@@ -52,10 +55,12 @@ public class ContatoAdapter extends RecyclerView.Adapter<ContatoAdapter.ContatoV
 
     public  class ContatoViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         final TextView nome;
+        final TextView fone;
 
         public ContatoViewHolder(View view) {
             super(view);
             nome = (TextView) view.findViewById(R.id.nome);
+            fone = (TextView) view.findViewById(R.id.fone);
             view.setOnClickListener(this);
         }
 
