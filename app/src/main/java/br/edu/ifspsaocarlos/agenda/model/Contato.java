@@ -7,6 +7,7 @@ public class Contato implements Serializable{
     private long id;
     private String nome;
     private String fone;
+    private String fone2;
     private String email;
 
     public Contato()
@@ -30,6 +31,12 @@ public class Contato implements Serializable{
     }
     public void setFone(String fone) {
         this.fone = fone;
+    }
+    public String getFone2() {
+        return fone2;
+    }
+    public void setFone2(String fone2) {
+        this.fone2 = fone2;
     }
     public String getEmail() {
         return email;

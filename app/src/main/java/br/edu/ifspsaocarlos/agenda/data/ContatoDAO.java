@@ -25,7 +25,8 @@ public class ContatoDAO {
 
         Cursor cursor;
 
-        String[] cols=new String[] {SQLiteHelper.KEY_ID,SQLiteHelper.KEY_NAME, SQLiteHelper.KEY_FONE, SQLiteHelper.KEY_EMAIL};
+        String[] cols=new String[] {SQLiteHelper.KEY_ID,SQLiteHelper.KEY_NAME,
+                SQLiteHelper.KEY_FONE, SQLiteHelper.KEY_FONE_2, SQLiteHelper.KEY_EMAIL};
         String where=null;
         String[] argWhere=null;
 
@@ -48,7 +49,8 @@ public class ContatoDAO {
                 contato.setId(cursor.getInt(0));
                 contato.setNome(cursor.getString(1));
                 contato.setFone(cursor.getString(2));
-                contato.setEmail(cursor.getString(3));
+                contato.setFone2(cursor.getString(3));
+                contato.setEmail(cursor.getString(4));
                 contatos.add(contato);
                 cursor.moveToNext();
             }
@@ -63,6 +65,7 @@ public class ContatoDAO {
         ContentValues updateValues = new ContentValues();
         updateValues.put(SQLiteHelper.KEY_NAME, c.getNome());
         updateValues.put(SQLiteHelper.KEY_FONE, c.getFone());
+        updateValues.put(SQLiteHelper.KEY_FONE_2, c.getFone2());
         updateValues.put(SQLiteHelper.KEY_EMAIL, c.getEmail());
         database.update(SQLiteHelper.DATABASE_TABLE, updateValues, SQLiteHelper.KEY_ID + "="
                 + c.getId(), null);
@@ -75,6 +78,7 @@ public class ContatoDAO {
         ContentValues values = new ContentValues();
         values.put(SQLiteHelper.KEY_NAME, c.getNome());
         values.put(SQLiteHelper.KEY_FONE, c.getFone());
+        values.put(SQLiteHelper.KEY_FONE_2, c.getFone2());
         values.put(SQLiteHelper.KEY_EMAIL, c.getEmail());
         database.insert(SQLiteHelper.DATABASE_TABLE, null, values);
         database.close();
