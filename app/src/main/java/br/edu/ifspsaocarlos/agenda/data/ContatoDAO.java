@@ -6,7 +6,12 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import br.edu.ifspsaocarlos.agenda.model.Contato;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -26,7 +31,8 @@ public class ContatoDAO {
         Cursor cursor;
 
         String[] cols=new String[] {SQLiteHelper.KEY_ID,SQLiteHelper.KEY_NAME,
-                SQLiteHelper.KEY_FONE, SQLiteHelper.KEY_FONE_2, SQLiteHelper.KEY_EMAIL};
+                SQLiteHelper.KEY_FONE, SQLiteHelper.KEY_FONE_2, SQLiteHelper.KEY_EMAIL,
+                SQLiteHelper.KEY_ANIVERSARIO};
         String where=null;
         String[] argWhere=null;
 
@@ -51,6 +57,13 @@ public class ContatoDAO {
                 contato.setFone(cursor.getString(2));
                 contato.setFone2(cursor.getString(3));
                 contato.setEmail(cursor.getString(4));
+                DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+                try {
+                    Date date = (Date)formatter.parse(cursor.getString(5));
+                    contato.setAniversario(date);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
                 contatos.add(contato);
                 cursor.moveToNext();
             }
@@ -67,6 +80,7 @@ public class ContatoDAO {
         updateValues.put(SQLiteHelper.KEY_FONE, c.getFone());
         updateValues.put(SQLiteHelper.KEY_FONE_2, c.getFone2());
         updateValues.put(SQLiteHelper.KEY_EMAIL, c.getEmail());
+        updateValues.put(SQLiteHelper.KEY_ANIVERSARIO, String.valueOf(c.getAniversario()));
         database.update(SQLiteHelper.DATABASE_TABLE, updateValues, SQLiteHelper.KEY_ID + "="
                 + c.getId(), null);
         database.close();
@@ -80,6 +94,7 @@ public class ContatoDAO {
         values.put(SQLiteHelper.KEY_FONE, c.getFone());
         values.put(SQLiteHelper.KEY_FONE_2, c.getFone2());
         values.put(SQLiteHelper.KEY_EMAIL, c.getEmail());
+        values.put(SQLiteHelper.KEY_ANIVERSARIO, String.valueOf(c.getAniversario()));
         database.insert(SQLiteHelper.DATABASE_TABLE, null, values);
         database.close();
     }

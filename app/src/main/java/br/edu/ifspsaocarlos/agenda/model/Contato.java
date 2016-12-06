@@ -1,6 +1,7 @@
 package br.edu.ifspsaocarlos.agenda.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class Contato implements Serializable{
     private static final long serialVersionUID = 1L;
@@ -9,6 +10,7 @@ public class Contato implements Serializable{
     private String fone;
     private String fone2;
     private String email;
+    private Date aniversario;
 
     public Contato()
     {
@@ -44,5 +46,7 @@ public class Contato implements Serializable{
     public void setEmail(String email) {
         this.email = email;
     }
+    public Date getAniversario() { return aniversario; }
+    public void setAniversario(Date aniversario) { this.aniversario = aniversario; }
 }
 
